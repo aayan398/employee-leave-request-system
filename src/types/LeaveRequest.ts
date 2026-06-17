@@ -11,4 +11,5 @@ export type LeaveRequest = {
   reason: string;
   status: LeaveStatus;
   createdAt: string;
+  managerComment?: string;
 };

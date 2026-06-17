@@ -1,83 +1,70 @@
-.app {
-  min-height: 100vh;
-  background: #f4f7fb;
-  color: #172033;
-}
-
-.header {
-  background: #12355b;
-  color: white;
-  padding: 32px 24px;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 32px;
-}
-
-.header p {
-  margin: 8px 0 0;
-  color: #d8e6f3;
-}
-
-.container {
-  width: min(1100px, calc(100% - 32px));
-  margin: 32px auto;
-}
-
-.card {
-  background: white;
-  border: 1px solid #dde5ef;
+.role-switcher {
+  display: inline-flex;
+  background: #dce8f4;
   border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(18, 53, 91, 0.08);
-}
-
-.card h2 {
-  margin: 0 0 20px;
-  font-size: 22px;
-}
-
-.balance-card {
+  padding: 4px;
   margin-bottom: 24px;
 }
 
-.balance-grid {
+.role-switcher button {
+  grid-column: auto;
+  background: transparent;
+  color: #12355b;
+  padding: 10px 16px;
+}
+
+.role-switcher button.active {
+  background: #12355b;
+  color: white;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin-bottom: 6px;
+}
+
+.section-header p {
+  margin: 0;
+  color: #66788a;
+}
+
+.manager-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
+  margin-bottom: 20px;
 }
 
-.balance-grid div {
+.manager-stats div {
   background: #eef5fb;
   border-radius: 8px;
   padding: 18px;
 }
 
-.balance-grid span {
+.manager-stats span {
   display: block;
   color: #5d6f84;
   font-size: 14px;
   margin-bottom: 8px;
 }
 
-.balance-grid strong {
-  font-size: 28px;
+.manager-stats strong {
+  font-size: 26px;
 }
 
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.leave-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.filters {
+  display: flex;
   gap: 16px;
+  margin-bottom: 20px;
 }
 
-.leave-form label {
+.filters label {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -85,105 +72,85 @@
   color: #26384f;
 }
 
-.leave-form input,
-.leave-form select,
-.leave-form textarea {
+.filters select {
   border: 1px solid #cbd7e5;
   border-radius: 6px;
   padding: 10px 12px;
   font: inherit;
 }
 
-.leave-form textarea {
-  min-height: 90px;
-  resize: vertical;
+.manager-request {
+  display: block;
 }
 
-.full-width {
-  grid-column: 1 / -1;
-}
-
-.error-message {
-  grid-column: 1 / -1;
-  margin: 0;
-  color: #b42318;
-  font-weight: 600;
-}
-
-button {
-  grid-column: 1 / -1;
-  border: none;
-  border-radius: 6px;
-  background: #1769aa;
-  color: white;
-  padding: 12px 16px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #12578d;
-}
-
-.empty-state {
-  color: #66788a;
-}
-
-.request-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.request-item {
+.request-title-row {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  border: 1px solid #e1e8f0;
-  border-radius: 8px;
-  padding: 16px;
 }
 
-.request-item h3 {
-  margin: 0 0 6px;
+.manager-comment {
+  background: #f4f7fb;
+  border-left: 4px solid #1769aa;
+  padding: 10px;
+  border-radius: 4px;
 }
 
-.request-item p {
-  margin: 0 0 6px;
-  color: #51657a;
+.manager-actions {
+  margin-top: 14px;
 }
 
-.reason {
-  font-size: 14px;
+.manager-actions textarea {
+  width: 100%;
+  min-height: 70px;
+  border: 1px solid #cbd7e5;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font: inherit;
+  resize: vertical;
 }
 
-.status {
-  align-self: flex-start;
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 13px;
-  font-weight: 700;
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.status-pending {
-  background: #fff4cc;
-  color: #8a6200;
+.action-buttons button {
+  grid-column: auto;
 }
 
-.status-approved {
-  background: #dff8e7;
-  color: #1d7a3a;
+.approve-button {
+  background: #1d7a3a;
 }
 
-.status-rejected {
-  background: #fde2e1;
-  color: #b42318;
+.approve-button:hover {
+  background: #16612e;
+}
+
+.reject-button {
+  background: #b42318;
+}
+
+.reject-button:hover {
+  background: #8f1c13;
 }
 
 @media (max-width: 800px) {
-  .content-grid,
-  .balance-grid,
-  .leave-form {
+  .manager-stats,
+  .filters {
     grid-template-columns: 1fr;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .request-title-row {
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    flex-direction: column;
   }
 }
