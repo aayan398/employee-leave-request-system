@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type { LeaveRequest, LeaveStatus } from "../types/LeaveRequest";
+import type { LeaveRequest, LeaveStatus, LeaveType } from "../types/LeaveRequest";
 import RequestFilters from "./RequestFilters";
 
 type StatusFilter = "All" | LeaveStatus;
-type TypeFilter = "All" | "Annual" | "Sick" | "Personal";
+type TypeFilter = "All" | LeaveType;
 
 type ManagerDashboardProps = {
   requests: LeaveRequest[];
@@ -25,6 +25,7 @@ export default function ManagerDashboard({
   const filteredRequests = requests.filter((request) => {
     const matchesStatus =
       statusFilter === "All" || request.status === statusFilter;
+
     const matchesType = typeFilter === "All" || request.leaveType === typeFilter;
 
     return matchesStatus && matchesType;
@@ -60,8 +61,8 @@ export default function ManagerDashboard({
   }
 
   return (
-    <section className="card">
-      <div className="section-header">
+    <section className="card manager-card">
+      <div className="section-heading manager-heading">
         <div>
           <h2>Manager Dashboard</h2>
           <p>Review, approve, and reject employee leave requests.</p>
@@ -69,17 +70,17 @@ export default function ManagerDashboard({
       </div>
 
       <div className="manager-stats">
-        <div>
+        <div className="metric-card">
           <span>Pending</span>
           <strong>{pendingCount}</strong>
         </div>
 
-        <div>
+        <div className="metric-card">
           <span>Approved</span>
           <strong>{approvedCount}</strong>
         </div>
 
-        <div>
+        <div className="metric-card">
           <span>Rejected</span>
           <strong>{rejectedCount}</strong>
         </div>
@@ -98,9 +99,10 @@ export default function ManagerDashboard({
         <div className="request-list">
           {filteredRequests.map((request) => (
             <article key={request.id} className="request-item manager-request">
-              <div>
+              <div className="request-main">
                 <div className="request-title-row">
                   <h3>{request.employeeName}</h3>
+
                   <span
                     className={`status status-${request.status.toLowerCase()}`}
                   >
@@ -108,8 +110,8 @@ export default function ManagerDashboard({
                   </span>
                 </div>
 
-                <p>
-                  {request.leaveType} leave from {request.startDate} to{" "}
+                <p className="request-meta">
+                  {request.leaveType} leave • {request.startDate} to{" "}
                   {request.endDate}
                 </p>
 

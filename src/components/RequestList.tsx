@@ -7,7 +7,12 @@ type RequestListProps = {
 export default function RequestList({ requests }: RequestListProps) {
   return (
     <section className="card">
-      <h2>My Requests</h2>
+      <div className="section-heading">
+        <div>
+          <h2>My Requests</h2>
+          <p>View submitted leave requests and their current status.</p>
+        </div>
+      </div>
 
       {requests.length === 0 ? (
         <p className="empty-state">No leave requests submitted yet.</p>
@@ -15,18 +20,29 @@ export default function RequestList({ requests }: RequestListProps) {
         <div className="request-list">
           {requests.map((request) => (
             <article key={request.id} className="request-item">
-              <div>
-                <h3>{request.employeeName}</h3>
-                <p>
-                  {request.leaveType} leave from {request.startDate} to{" "}
+              <div className="request-main">
+                <div className="request-title-row">
+                  <h3>{request.employeeName}</h3>
+                  <span
+                    className={`status status-${request.status.toLowerCase()}`}
+                  >
+                    {request.status}
+                  </span>
+                </div>
+
+                <p className="request-meta">
+                  {request.leaveType} leave • {request.startDate} to{" "}
                   {request.endDate}
                 </p>
-                <p className="reason">{request.reason}</p>
-              </div>
 
-              <span className={`status status-${request.status.toLowerCase()}`}>
-                {request.status}
-              </span>
+                <p className="reason">{request.reason}</p>
+
+                {request.managerComment && (
+                  <p className="manager-comment">
+                    Manager comment: {request.managerComment}
+                  </p>
+                )}
+              </div>
             </article>
           ))}
         </div>

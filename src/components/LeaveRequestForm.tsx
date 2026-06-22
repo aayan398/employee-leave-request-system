@@ -5,7 +5,9 @@ type LeaveRequestFormProps = {
   onAddRequest: (request: LeaveRequest) => void;
 };
 
-export default function LeaveRequestForm({ onAddRequest }: LeaveRequestFormProps) {
+export default function LeaveRequestForm({
+  onAddRequest,
+}: LeaveRequestFormProps) {
   const [employeeName, setEmployeeName] = useState("");
   const [leaveType, setLeaveType] = useState<LeaveType>("Annual");
   const [startDate, setStartDate] = useState("");
@@ -17,7 +19,7 @@ export default function LeaveRequestForm({ onAddRequest }: LeaveRequestFormProps
     event.preventDefault();
 
     if (!employeeName.trim() || !startDate || !endDate || !reason.trim()) {
-      setError("Please fill in all fields.");
+      setError("Please fill in all fields before submitting.");
       return;
     }
 
@@ -49,7 +51,12 @@ export default function LeaveRequestForm({ onAddRequest }: LeaveRequestFormProps
 
   return (
     <section className="card">
-      <h2>Submit Leave Request</h2>
+      <div className="section-heading">
+        <div>
+          <h2>Submit Leave Request</h2>
+          <p>Create a new request for manager review.</p>
+        </div>
+      </div>
 
       <form className="leave-form" onSubmit={handleSubmit}>
         <label>
@@ -103,7 +110,9 @@ export default function LeaveRequestForm({ onAddRequest }: LeaveRequestFormProps
 
         {error && <p className="error-message">{error}</p>}
 
-        <button type="submit">Submit Request</button>
+        <button type="submit" className="primary-button">
+          Submit Request
+        </button>
       </form>
     </section>
   );

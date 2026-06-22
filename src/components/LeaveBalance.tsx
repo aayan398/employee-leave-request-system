@@ -3,25 +3,33 @@ type LeaveBalanceProps = {
   usedDays: number;
 };
 
-export default function LeaveBalance({ totalDays, usedDays }: LeaveBalanceProps) {
+export default function LeaveBalance({
+  totalDays,
+  usedDays,
+}: LeaveBalanceProps) {
   const remainingDays = totalDays - usedDays;
 
   return (
     <section className="card balance-card">
-      <h2>Leave Balance</h2>
+      <div className="section-heading">
+        <div>
+          <h2>Leave Balance</h2>
+          <p>Track approved leave usage and remaining allowance.</p>
+        </div>
+      </div>
 
       <div className="balance-grid">
-        <div>
+        <div className="metric-card">
           <span>Total Days</span>
           <strong>{totalDays}</strong>
         </div>
 
-        <div>
+        <div className="metric-card">
           <span>Used Days</span>
           <strong>{usedDays}</strong>
         </div>
 
-        <div>
+        <div className="metric-card">
           <span>Remaining</span>
           <strong>{remainingDays}</strong>
         </div>

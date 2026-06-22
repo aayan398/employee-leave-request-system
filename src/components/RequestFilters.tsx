@@ -22,7 +22,9 @@ export default function RequestFilters({
         Status
         <select
           value={statusFilter}
-          onChange={(event) => onStatusChange(event.target.value as StatusFilter)}
+          onChange={(event) =>
+            onStatusChange(event.target.value as StatusFilter)
+          }
         >
           <option value="All">All</option>
           <option value="Pending">Pending</option>
